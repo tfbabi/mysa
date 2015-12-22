@@ -23,13 +23,10 @@ def purge(request):
     #定义清理url接口调用函数
     def cleanurl(url):
         from .models import apiinfo
-        #apiurl = "http://purge.faout.com:8080/clear?url="
         r = apiinfo.objects.get(name="myapi") 
         apiurl = r.url
         requesturl = apiurl+url
-        #print requesturl
         r = requests.get(requesturl)
-        #print r.text
 
 
     #并发向接口发出清理缓存请求
