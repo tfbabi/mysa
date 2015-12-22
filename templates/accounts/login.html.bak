@@ -1,0 +1,30 @@
+{% extends "common/base.html" %}
+{% load staticfiles %}
+
+{% block customcss%}
+<link href="{% static 'index/css/signin.css' %}" rel="stylesheet">
+
+{% endblock customcss %}
+{% block content %}
+
+<div class="container">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">登录</h2>
+        <label for="inputUsername" class="sr-only">用户名</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="用户名" required autofocus>
+        <label for="inputPassword" class="sr-only">密  码</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="密   码" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+
+{%endblock content %}

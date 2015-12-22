@@ -1,0 +1,28 @@
+{% extends "common/base.html" %}
+{% load staticfiles %}
+
+{% block customcss%}
+<link href="{% static 'accounts/css/style.css' %}" rel="stylesheet">
+
+{% endblock customcss %}
+{% block content %}
+
+<body class="gray-bg">
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            
+	    <h1>注册页面：</h1>
+<form method = 'post' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{uf.as_p}}
+    <input type="submit" value = "ok" />
+</form>
+<br>
+<a href="/accounts/login/">登陆</a>
+            <p class="m-t"> <small><b>Copyright</b> xxxx Organization © 2015</small> </p>
+        </div>
+    </div>
+
+
+
+{%endblock content %}

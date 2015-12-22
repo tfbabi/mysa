@@ -1,0 +1,155 @@
+{% extends "index/index_base.html" %}
+{% load staticfiles %}
+{% block container%}
+<div class="container">
+      <h2><span class="label label-primary">Sphinx Indexer</span></h2>
+
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content">
+                  <!--  <div class="">
+                    <a target="_blank" href="/juser/dept_add/" class="btn btn-sm btn-primary "> 添加部门 </a>
+                    <a id="del_btn" class="btn btn-sm btn-danger"> 删除所选 </a>
+                    </div>
+                    -->
+                    <table class="table table-striped table-bordered table-hover " id="editable">
+                        <thead>
+                            <tr>
+				<!--
+                                <th class="text-center">
+                                    <input id="select_all" onclick="selectAll()" name="select_all" type="checkbox">
+                                </th>
+ 				-->
+                                <th class="text-center"> 选择</th>
+
+                                <th class="text-center">序号</th>
+                                <th class="text-center">PROJECT NAME</th>
+                                <th class="text-center">IP</th>
+                                <th class="text-center">SSH PORT</th>
+                                <th class="text-center">CONF</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <tr class="gradeX">
+                               <td class="text-center">
+                                    <input name="selected" value="1" type="checkbox">
+                                </td> 
+                                <td class="text-center"> 01 </td>
+                                <td class="text-center"> trendsgal TEST </td>
+                                <td class="text-center"> 192.168.6.71 </td>
+                                <td class="text-center"> 22 </td>
+                                <td class="text-center"> /usr/local/sphinx/etc/trendsgal.conf</a> </td>
+                                <td class="text-center">
+
+                                    
+                                      <!-- <a href="../dept_edit/?id=1" class="btn btn-xs btn-info">Indexer</a> --> 
+  					<button class="btn btn-xs btn-success" onclick="indexer()" type="button">生成索引</button>
+                                    
+                                </td>
+                            </tr>
+                        
+                        
+                        
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="dataTables_info" id="editable_info" role="status" aria-live="polite">
+                                Showing 1 to 3 of 3 entries
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+    <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+        <ul class="pagination" style="margin-top: 0; float: right">
+        
+            
+                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+                     <a href="#">Previous</a>
+                </li>
+            
+            
+            
+                
+                    <li class="paginate_button active" aria-controls="editable" tabindex="0"><a href="?page=1" title="第1页">1</a></li>
+                
+            
+            
+            
+                <li class="paginate_button next disabled" aria-controls="editable" tabindex="0" id="editable_next">
+                    <a href="#">Next</a>
+                </li>
+            
+        
+        </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        
+
+
+
+        
+    </div> <!-- /container -->
+
+
+
+
+
+
+
+
+  <script>
+  var geetest_passed = false;
+  var selectorObj;
+  function gt_custom_ajax(result, selector) {
+    selectorObj=selector;
+    geetest_passed = result;
+  }
+  var id = "";
+  function indexer(){
+    id = $.trim($("#selected").val());
+    if(id==''){
+      alert('请输入***');
+      $("#id").focus()
+      return false;
+    }
+
+    $.ajax({
+            type:'get',
+            dataType:'json',
+            url:'//127.0.0.1:8080/api/'+keyword,
+            success:function(data){
+            if(!data.id){
+                alert('恭喜!您的信息没有被泄露!');
+                return false;
+          }
+    var re="<ul>";
+    re+="<li>姓  名："+data.name+'</li>';
+    re+="<li>身份证："+data.id+'</li>';
+    re+="<li>E-mail："+data.email+'</li>';
+    re+="<li>手机号："+data.phone+'</li>';
+    re+="</ul>"
+    $('#container').html(re)
+    },
+    error:function(){
+              alert('您的信息不存在!')
+            }
+          })
+  }
+
+  </script>
+
+
+{%endblock container%}
